@@ -1,24 +1,43 @@
-# build output
+# Build output
 dist/
-# generated types
+.vercel/
 .astro/
 
-# dependencies
+# Dependencies
 node_modules/
 
-# logs
+# Logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-
-# environment variables
+# Environment variables & secrets
 .env
-.env.production
+.env.*
+!.env.example
 
-# macOS-specific files
+# Operating System files
 .DS_Store
+Thumbs.db
 
-# jetbrains setting folder
+# IDE & Editor files
 .idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln.docstates
+
+# Local AI / Agent machine-specific configs
+*.local.json
+.antigravity/
+
+# Herramientas de IA (skills de terceros, no son parte del sitio)
+.agent/
+.agents/
+.github/skills/
+.github/agents/
+.github/hooks/
+.impeccable/
+skills-lock.json

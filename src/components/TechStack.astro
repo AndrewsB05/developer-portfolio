@@ -1,0 +1,191 @@
+---
+import { translations } from '../i18n/translations';
+const t = translations.es;
+
+// SVG icons for each technology in full official brand colors (Devicon & official sources)
+const techIcons: Record<string, string> = {
+  'Python': '<svg viewBox="0 0 24 24"><path fill="#3776AB" d="M11.927 0c-3.155 0-5.014.288-5.014 2.115v2.247h5.088v.75H4.257C1.94 5.112 0 6.643 0 9.878c0 3.235 1.688 4.767 4.004 4.767h2.388v-2.31c0-2.614 2.22-4.743 4.908-4.743h5.087V5.215C16.387 1.848 14.59 0 11.927 0zm-2.73 1.5c.504 0 .913.41.913.914a.914.914 0 1 1-1.826 0c0-.505.41-.914.913-.914z"/><path fill="#FFD438" d="M12.073 24c3.155 0 5.014-.288 5.014-2.115v-2.247H12v-.75h7.743c2.316 0 4.257-1.531 4.257-4.766 0-3.235-1.688-4.767-4.004-4.767h-2.388v2.31c0 2.614-2.22 4.743-4.908 4.743H7.613v2.377C7.613 22.152 9.41 24 12.073 24zm2.73-1.5a.914.914 0 1 1 0-1.828.914.914 0 0 1 0 1.828z"/></svg>',
+  'JavaScript': '<svg viewBox="0 0 24 24"><rect width="24" height="24" rx="3" fill="#F7DF1E"/><path fill="#000000" d="M19.5 17.5c-.3 1.2-1.3 2-2.8 2-2.1 0-3.3-1.3-3.3-3.2h2.2c.1.9.6 1.4 1.3 1.4.7 0 1.1-.3 1.1-.9 0-.6-.4-.8-1.5-1.2-1.7-.6-2.8-1.3-2.8-2.9 0-1.6 1.3-2.7 3-2.7 1.6 0 2.6.9 2.8 2.2h-2.1c-.1-.6-.4-.9-1-.9-.5 0-.9.3-.9.7 0 .5.3.7 1.4 1.1 1.9.7 2.9 1.4 2.9 3.1zM11.5 10v6.7c0 1.8-.9 2.8-2.6 2.8-1.5 0-2.4-.7-2.7-1.8l2-.9c.2.6.5.9 1 .9.5 0 .8-.3.8-1v-6.7h1.5z"/></svg>',
+  'TypeScript': '<svg viewBox="0 0 128 128"><path fill="#3178c6" d="M1.5 0h125A1.5 1.5 0 0 1 128 1.5v125a1.5 1.5 0 0 1-1.5 1.5H1.5A1.5 1.5 0 0 1 0 126.5V1.5A1.5 1.5 0 0 1 1.5 0z"/><path fill="#fff" d="M78.3 96.8c3.4 1.9 7.5 3.3 11.9 3.3 8.7 0 13.5-4.4 13.5-10.9 0-6.5-4.1-9.5-11.7-12.3-9.7-3.5-15.8-7.7-15.8-16.7 0-9.9 7.8-17.2 20-17.2 5.3 0 9.8 1.2 12.8 2.8l-2.8 9.7c-2.3-1.3-5.9-2.5-10.1-2.5-6.9 0-10.6 3.5-10.6 8.2 0 5.6 4.4 8.1 12.7 11.3 10.4 3.9 15 8.7 15 17.7 0 11-8.3 17.8-21.6 17.8-6.4 0-11.7-1.5-16-3.5l2.7-10zM50.9 53.8H34.4v-9.8h43v9.8H61v58.6H50.9V53.8z"/></svg>',
+  'Node.js': '<svg viewBox="0 0 24 24"><path fill="#539E43" d="M11.998 24c-.321 0-.641-.084-.922-.247l-2.936-1.737c-.438-.245-.224-.332-.08-.383.585-.203.703-.25 1.328-.604.065-.037.151-.023.218.017l2.256 1.339a.29.29 0 00.272 0l8.795-5.076a.277.277 0 00.134-.238V6.921a.28.28 0 00-.137-.242L12.137 1.6a.27.27 0 00-.27 0L3.075 6.68a.282.282 0 00-.139.241v10.15a.27.27 0 00.138.236l2.409 1.392c1.307.654 2.108-.116 2.108-.89V7.787c0-.142.114-.253.256-.253h1.115c.139 0 .255.112.255.253v10.021c0 1.745-.95 2.745-2.604 2.745-.508 0-.909 0-2.026-.551L2.28 18.675c-.57-.329-.922-.945-.922-1.604V6.921c0-.659.353-1.275.922-1.603l8.795-5.082c0.557-.315 1.296-.315 1.848 0l8.794 5.082c.57 0.329.924 0.944.924 1.603v10.15c0 .659-.354 1.273-.924 1.604l-8.794 5.078c-.279.16-.598.244-.924.244zm7.101-10.007c0-1.9-1.284-2.406-3.987-2.763-2.731-.361-3.009-.548-3.009-1.187 0-.528.235-1.233 2.258-1.233 1.807 0 2.473.389 2.747 1.607.024.115.129.199.247.199h1.141c.071 0 .138-.031.186-.081.048-.054.074-.123.067-.196-.177-2.098-1.571-3.076-4.388-3.076-2.508 0-4.004 1.058-4.004 2.833 0 1.925 1.488 2.457 3.895 2.695 2.88.282 3.103.703 3.103 1.269 0 .983-.789 1.402-2.642 1.402-2.327 0-2.839-.584-3.011-1.742-.02-.124-.126-.215-.253-.215H10.2c-.141 0-.254.112-.254.253 0 1.482.806 3.248 4.655 3.248 2.9 0 4.499-1.097 4.499-3.014z"/></svg>',
+  'Java': '<svg viewBox="0 0 128 128"><path fill="#0074BD" d="M47.617 98.12s-4.767 2.774 3.397 3.71c9.892 1.13 14.947.968 25.845-1.092 0 0 2.871 1.795 6.873 3.351-24.439 10.47-55.308-.607-36.115-5.969zm-2.988-13.665s-5.348 3.959 2.823 4.805c10.567 1.091 18.91 1.18 33.354-1.6 0 0 1.993 2.025 5.132 3.131-29.542 8.64-62.446.68-41.309-6.336z"/><path fill="#EA2D2E" d="M69.802 61.271c6.025 6.935-1.58 13.17-1.58 13.17s15.289-7.891 8.269-17.777c-6.559-9.215-11.587-13.792 15.635-29.58 0 .001-42.731 10.67-22.324 34.187z"/><path fill="#0074BD" d="M102.123 108.229s3.529 2.91-3.888 5.159c-14.102 4.272-58.706 5.56-71.094.171-4.451-1.938 3.899-4.625 6.526-5.192 2.739-.593 4.303-.485 4.303-.485-4.953-3.487-32.013 6.85-13.743 9.815 49.821 8.076 90.817-3.637 77.896-9.468zM49.912 70.294s-22.686 5.389-8.033 7.348c6.188.828 18.518.638 30.011-.326 9.39-.789 18.813-2.474 18.813-2.474s-3.308 1.419-5.704 3.053c-23.042 6.061-67.544 3.238-54.731-2.958 10.832-5.239 19.644-4.643 19.644-4.643zm40.697 22.747c23.421-12.167 12.591-23.86 5.032-22.285-1.848.385-2.677.72-2.677.72s.688-1.079 2-1.543c14.953-5.255 26.451 15.503-4.823 23.725 0-.002.359-.327.468-.617z"/><path fill="#EA2D2E" d="M76.491 1.587S89.459 14.563 64.188 34.51c-20.266 16.006-4.621 25.13-.007 35.559-11.831-10.673-20.509-20.07-14.688-28.815C58.041 28.42 81.722 22.195 76.491 1.587z"/><path fill="#0074BD" d="M52.214 126.021c22.476 1.437 57-.8 57.817-11.436 0 0-1.571 4.032-18.577 7.231-19.186 3.612-42.854 3.191-56.887.874 0 .001 2.875 2.381 17.647 3.331z"/></svg>',
+  'C#': '<svg viewBox="0 0 128 128"><path fill="#9B4F96" d="M115.4 30.7L67.1 2.9c-.8-.5-1.9-.7-3.1-.7-1.2 0-2.3.3-3.1.7l-48 27.9c-1.7 1-2.9 3.5-2.9 5.4v55.7c0 1.1.2 2.4 1 3.5l106.8-62c-.6-1.2-1.5-2.1-2.4-2.7z"/><path fill="#68217A" d="M10.7 95.3c.5.8 1.2 1.5 1.9 1.9l48.2 27.9c.8.5 1.9.7 3.1.7 1.2 0 2.3-.3 3.1-.7l48-27.9c1.7-1 2.9-3.5 2.9-5.4V36.1c0-.9-.1-1.9-.6-2.8l-106.6 62z"/><path fill="#fff" d="M85.3 76.1C81.1 83.5 73.1 88.5 64 88.5c-13.5 0-24.5-11-24.5-24.5s11-24.5 24.5-24.5c9.1 0 17.1 5 21.3 12.5l13-7.5c-6.8-11.9-19.6-20-34.3-20-21.8 0-39.5 17.7-39.5 39.5s17.7 39.5 39.5 39.5c14.6 0 27.4-8 34.2-19.8l-12.9-7.6zM97 66.2l.9-4.3h-4.2v-4.7h5.1L100 51h4.9l-1.2 6.1h3.8l1.2-6.1h4.8l-1.2 6.1h2.4v4.7h-3.3l-.9 4.3h4.2v4.7h-5.1l-1.2 6h-4.9l1.2-6h-3.8l-1.2 6h-4.8l1.2-6h-2.4v-4.7H97zm4.8 0h3.8l.9-4.3h-3.8l-.9 4.3z"/></svg>',
+  'APIs REST': '<svg viewBox="0 0 24 24"><rect x="1.5" y="4" width="21" height="16" rx="3.5" fill="#0284C7" fill-opacity="0.18" stroke="#0284C7" stroke-width="1.5"/><path fill="#38BDF8" d="M4.8 15.2l2-5.4h1.7l2 5.4H9.1l-.4-1.3H6.8l-.4 1.3H4.8zm2.4-2.4h1.1l-.55-1.8-.55 1.8zm4.8 2.4V9.8h2.6c1.3 0 2.1.7 2.1 1.8 0 1.1-.8 1.8-2.1 1.8H13.2v1.8H12zm1.2-2.8h1.4c.5 0 .9-.3.9-.8 0-.4-.4-.7-.9-.7h-1.4v1.5zm4.8 2.8V9.8h1.3v5.4h-1.3z"/><circle cx="20" cy="8.5" r="1.3" fill="#38BDF8"/><circle cx="20" cy="15.5" r="1.3" fill="#38BDF8"/></svg>',
+  'REST APIs': '<svg viewBox="0 0 24 24"><rect x="1.5" y="4" width="21" height="16" rx="3.5" fill="#0284C7" fill-opacity="0.18" stroke="#0284C7" stroke-width="1.5"/><path fill="#38BDF8" d="M4.8 15.2l2-5.4h1.7l2 5.4H9.1l-.4-1.3H6.8l-.4 1.3H4.8zm2.4-2.4h1.1l-.55-1.8-.55 1.8zm4.8 2.4V9.8h2.6c1.3 0 2.1.7 2.1 1.8 0 1.1-.8 1.8-2.1 1.8H13.2v1.8H12zm1.2-2.8h1.4c.5 0 .9-.3.9-.8 0-.4-.4-.7-.9-.7h-1.4v1.5zm4.8 2.8V9.8h1.3v5.4h-1.3z"/><circle cx="20" cy="8.5" r="1.3" fill="#38BDF8"/><circle cx="20" cy="15.5" r="1.3" fill="#38BDF8"/></svg>',
+  'SQL': '<svg viewBox="0 0 24 24"><path fill="#0284C7" d="M12 2C6.48 2 2 3.79 2 6v12c0 2.21 4.48 4 10 4s10-1.79 10-4V6c0-2.21-4.48-4-10-4z"/><ellipse cx="12" cy="6" rx="8" ry="2" fill="#38BDF8"/><path fill="#0369A1" d="M4 8.2v3.6C5.4 12.8 8.4 13.5 12 13.5s6.6-.7 8-1.7V8.2C18.6 9.3 15.6 10 12 10S5.4 9.3 4 8.2zm0 5.8v3.6c1.4 1 4.4 1.7 8 1.7s6.6-.7 8-1.7V14c-1.4 1.1-4.4 1.8-8 1.8s-6.6-.7-8-1.8z"/></svg>',
+  'MongoDB': '<svg viewBox="0 0 24 24"><path fill="#47A248" d="M17.193 9.555c-1.264-5.58-4.252-7.414-4.573-8.115-.28-.394-.53-.954-.735-1.44-.036.495-.055.685-.523 1.184-.723.566-4.438 3.682-4.74 10.02-.282 5.912 4.27 9.435 4.888 9.884l.07.05A73.49 73.49 0 0111.91 24h.481c.114-1.032.284-2.056.51-3.07.417-.296.604-.463.85-.693a11.342 11.342 0 003.639-8.464c.01-.814-.103-1.662-.197-2.218zm-5.336 8.195s0-8.291.275-8.29c.213 0 .49 10.695.49 10.695-.381-.045-.765-1.76-.765-2.405z"/><path fill="#3FA037" d="M12.008 1.44c-.28-.394-.53-.954-.735-1.44-.036.495-.055.685-.523 1.184-.723.566-4.438 3.682-4.74 10.02-.282 5.912 4.27 9.435 4.888 9.884l.07.05A73.49 73.49 0 0111.91 24V1.44h.098z"/></svg>',
+  'Supabase': '<svg viewBox="0 0 128 128"><defs><linearGradient id="supa-a" x1="53.974" x2="94.163" y1="54.974" y2="71.829" gradientTransform="translate(29.387 60.096) scale(1.1436)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#249361"/><stop offset="1" stop-color="#3ecf8e"/></linearGradient></defs><path fill="url(#supa-a)" d="M102.24 186.21c-3.267 4.117-9.904 1.862-9.977-3.397l-1.156-76.906h51.715c9.365 0 14.587 10.817 8.763 18.149z" transform="translate(-27.722 -60.338)"/><path fill="#3ecf8e" d="M53.484 2.128c3.267-4.117 9.905-1.862 9.977 3.396l.508 76.907H12.902c-9.365 0-14.587-10.817-8.764-18.149z"/></svg>',
+  'Docker': '<svg viewBox="0 0 24 24"><path fill="#2496ED" d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 00.186-.186V3.574a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.186m0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.136a.186.186 0 00-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185m-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.185.185 0 00-.184.185v1.888c0 .102.083.185.185.185m-2.964 0h2.119a.185.185 0 00.185-.185V9.006a.186.186 0 00-.185-.186H5.136a.186.186 0 00-.186.186v1.887c0 .102.084.185.186.185m-2.92 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186h-2.12a.186.186 0 00-.186.186v1.887c0 .102.084.185.186.185M23.763 9.89c-.065-.051-.672-.51-1.954-.51-.338.001-.676.03-1.01.087-.248-1.7-1.653-2.53-1.716-2.566l-.344-.199-.226.327c-.284.438-.49.922-.612 1.43-.23.97-.09 1.882.403 2.661-.595.332-1.55.413-1.744.42H.751a.751.751 0 00-.75.748 11.687 11.687 0 00.692 4.062c.545 1.428 1.355 2.48 2.41 3.124 1.18.723 3.1 1.137 5.275 1.137.983.003 1.963-.086 2.93-.266a12.228 12.228 0 003.823-1.389c.98-.567 1.86-1.288 2.61-2.136 1.252-1.418 1.998-2.997 2.553-4.4h.221c1.372 0 2.215-.549 2.68-1.009.309-.293.55-.65.707-1.046l.098-.288z"/></svg>',
+   'Git': '<svg viewBox="0 0 128 128"><path fill="#F34F29" d="M124.737 58.378L69.621 3.264c-3.172-3.174-8.32-3.174-11.497 0L46.68 14.71l14.518 14.518c3.375-1.139 7.243-.375 9.932 2.314 2.703 2.706 3.461 6.607 2.294 9.993l13.992 13.993c3.385-1.167 7.292-.413 9.994 2.295 3.78 3.777 3.78 9.9 0 13.679a9.673 9.673 0 01-13.683 0 9.677 9.677 0 01-2.105-10.521L68.574 47.933l-.002 34.341a9.708 9.708 0 012.559 1.828c3.778 3.777 3.778 9.898 0 13.683-3.779 3.777-9.904 3.777-13.679 0-3.778-3.784-3.778-9.905 0-13.683a9.65 9.65 0 013.167-2.11V47.333a9.581 9.581 0 01-3.167-2.111c-2.862-2.86-3.551-7.06-2.083-10.576L41.056 20.333 3.264 58.123a8.133 8.133 0 000 11.5l55.117 55.114c3.174 3.174 8.32 3.174 11.499 0l54.858-54.858a8.135 8.135 0 00-.001-11.501z"/></svg>',
+   'GitHub': '<svg viewBox="0 0 24 24"><path fill="#F0F6FC" d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>',
+   'GCP': '<svg viewBox="0 0 128 128"><path fill="#ea4535" d="M80.6 40.3h.4l-.2-.2 14-14v-.3c-11.8-10.4-28.1-14-43.2-9.5C36.5 20.8 24.9 32.8 20.7 48c.2-.1.5-.2.8-.2 5.2-3.4 11.4-5.4 17.9-5.4 2.2 0 4.3.2 6.4.6.1-.1.2-.1.3-.1 9-9.9 24.2-11.1 34.6-2.6h-.1z"/><path fill="#557ebf" d="M108.1 47.8c-2.3-8.5-7.1-16.2-13.8-22.1L80 39.9c6 4.9 9.5 12.3 9.3 20v2.5c16.9 0 16.9 25.2 0 25.2H63.9v20h-.1l.1.2h25.4c14.6.1 27.5-9.3 31.8-23.1 4.3-13.8-1-28.8-13-36.9z"/><path fill="#36a852" d="M39 107.9h26.3V87.7H39c-1.9 0-3.7-.4-5.4-1.1l-15.2 14.6v.2c6 4.3 13.2 6.6 20.7 6.6z"/><path fill="#f9bc15" d="M40.2 41.9c-14.9.1-28.1 9.3-32.9 22.8-4.8 13.6 0 28.5 11.8 37.3l15.6-14.9c-8.6-3.7-10.6-14.5-4-20.8 6.6-6.4 17.8-4.4 21.7 3.8L68 55.2C61.4 46.9 51.1 42 40.2 42.1z"/></svg>',
+  'Azure': '<svg viewBox="0 0 96 96"><defs><linearGradient id="az-grad1" x1="-1032.172" x2="-1059.213" y1="145.312" y2="65.426" gradientTransform="matrix(1 0 0 -1 1075 158)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#114a8b"/><stop offset="1" stop-color="#0669bc"/></linearGradient><linearGradient id="az-grad2" x1="-1027.165" x2="-997.482" y1="147.642" y2="68.561" gradientTransform="matrix(1 0 0 -1 1075 158)" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#3ccbf4"/><stop offset="1" stop-color="#2892df"/></linearGradient></defs><path fill="url(#az-grad1)" d="M33.338 6.544h26.038l-27.03 80.087a4.152 4.152 0 0 1-3.933 2.824H8.149a4.145 4.145 0 0 1-3.928-5.47L29.404 9.368a4.152 4.152 0 0 1 3.934-2.825z"/><path fill="#0078d4" d="M71.175 60.261h-41.29a1.911 1.911 0 0 0-1.305 3.309l26.532 24.764a4.171 4.171 0 0 0 2.846 1.121h23.38z"/><path fill="url(#az-grad2)" d="M66.595 9.364a4.145 4.145 0 0 0-3.928-2.82H33.648a4.146 4.146 0 0 1 3.928 2.82l25.184 74.62a4.146 4.146 0 0 1-3.928 5.472h29.02a4.146 4.146 0 0 0 3.927-5.472z"/></svg>',
+  'Manejo Terminal': '<svg viewBox="0 0 24 24"><rect width="22" height="18" x="1" y="3" rx="3.5" fill="#0F172A" stroke="#334155" stroke-width="1.2"/><circle cx="4.5" cy="6.5" r="1" fill="#EF4444"/><circle cx="7.5" cy="6.5" r="1" fill="#F59E0B"/><circle cx="10.5" cy="6.5" r="1" fill="#10B981"/><path stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M5 12l3 2.5-3 2.5M10.5 17h5.5"/></svg>',
+
+  'Terminal / Bash': '<svg viewBox="0 0 24 24"><rect width="22" height="18" x="1" y="3" rx="3.5" fill="#0F172A" stroke="#334155" stroke-width="1.2"/><circle cx="4.5" cy="6.5" r="1" fill="#EF4444"/><circle cx="7.5" cy="6.5" r="1" fill="#F59E0B"/><circle cx="10.5" cy="6.5" r="1" fill="#10B981"/><path stroke="#10B981" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M5 12l3 2.5-3 2.5M10.5 17h5.5"/></svg>',
+  'Redes Neuronales': '<svg viewBox="0 0 24 24"><circle cx="4" cy="5" r="2.5" fill="#8B5CF6"/><circle cx="4" cy="19" r="2.5" fill="#8B5CF6"/><circle cx="12" cy="12" r="3" fill="#EC4899"/><circle cx="20" cy="5" r="2.5" fill="#06B6D4"/><circle cx="20" cy="19" r="2.5" fill="#06B6D4"/><path stroke="#A855F7" stroke-width="1.5" stroke-opacity="0.7" d="M6 6.5l4 4M6 17.5l4-4M14 13.5l4 4M14 10.5l4-4"/></svg>',
+  'Neural Networks': '<svg viewBox="0 0 24 24"><circle cx="4" cy="5" r="2.5" fill="#8B5CF6"/><circle cx="4" cy="19" r="2.5" fill="#8B5CF6"/><circle cx="12" cy="12" r="3" fill="#EC4899"/><circle cx="20" cy="5" r="2.5" fill="#06B6D4"/><circle cx="20" cy="19" r="2.5" fill="#06B6D4"/><path stroke="#A855F7" stroke-width="1.5" stroke-opacity="0.7" d="M6 6.5l4 4M6 17.5l4-4M14 13.5l4 4M14 10.5l4-4"/></svg>',
+  'Modelos YOLO': '<svg viewBox="0 0 24 24"><path fill="#F59E0B" d="M2 2h6v2H4v4H2V2zm20 0v6h-2V4h-4V2h6zM2 22v-6h2v4h4v2H2zm20 0h-6v-2h4v-4h2v6z"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="#06B6D4" stroke-width="2"/><circle cx="12" cy="12" r="2" fill="#EF4444"/></svg>',
+  'YOLO Models': '<svg viewBox="0 0 24 24"><path fill="#F59E0B" d="M2 2h6v2H4v4H2V2zm20 0v6h-2V4h-4V2h6zM2 22v-6h2v4h4v2H2zm20 0h-6v-2h4v-4h2v6z"/><circle cx="12" cy="12" r="4.5" fill="none" stroke="#06B6D4" stroke-width="2"/><circle cx="12" cy="12" r="2" fill="#EF4444"/></svg>',
+  'Clean Code': '<svg viewBox="0 0 24 24"><path fill="#10B981" d="M12 2L4 5.5v5.5c0 5.2 3.4 10.1 8 11.3 4.6-1.2 8-6.1 8-11.3V5.5L12 2zm-1.2 14.2l-3.5-3.5 1.4-1.4 2.1 2.1 5.3-5.3 1.4 1.4-6.7 6.7z"/><path fill="#FBBF24" d="M19.5 2.5l.4 1 1 .4-1 .4-.4 1-.4-1-1-.4 1-.4z"/></svg>',
+  'PostgreSQL': '<svg viewBox="0 0 24 24"><path fill="#336791" d="M12 2C6.48 2 2 3.79 2 6v12c0 2.21 4.48 4 10 4s10-1.79 10-4V6c0-2.21-4.48-4-10-4z"/><ellipse cx="12" cy="6" rx="8" ry="2" fill="#4B8BBE"/></svg>',
+  'Redis': '<svg viewBox="0 0 24 24"><path fill="#DC382D" d="M12 0L1.5 5.5v13L12 24l10.5-5.5v-13L12 0z"/></svg>',
+  'Linux': '<svg viewBox="0 0 24 24"><path fill="#FCC624" d="M12.012 0c-3.13 0-5.666 2.536-5.666 5.666 0 1.25.405 2.404 1.09 3.344-.66.864-1.09 1.944-1.09 3.125 0 2.122 1.378 3.928 3.284 4.542-.03.26-.05.523-.05.79 0 3.606 2.923 6.533 6.532 6.533 1.636 0 3.132-.605 4.28-1.604.53-.458.983-.997 1.34-1.597.58-.967.91-2.096.91-3.332 0-.267-.02-.53-.05-.79 1.906-.614 3.284-2.42 3.284-4.542 0-1.18-.43-2.26-1.09-3.125.685-.94 1.09-2.094 1.09-3.344C25.886 2.536 23.35 0 20.22 0h-8.208z"/><circle cx="10" cy="5.5" r="1" fill="#000"/><circle cx="14" cy="5.5" r="1" fill="#000"/><path fill="#FFA500" d="M12 7c-.8 0-1.5.5-1.5 1.2S11.2 9.5 12 9.5s1.5-.6 1.5-1.3S12.8 7 12 7z"/></svg>',
+  'GitHub Actions': '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2088FF"/><path fill="#FFFFFF" d="M8 8l8 4-8 4V8z"/></svg>',
+};
+
+// Category icon mapping
+const categoryIcons: Record<string, string> = {
+  'Lenguajes de Programación': '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>',
+  'Programming Languages': '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>',
+  'Bases de Datos & APIs': '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>',
+  'Databases & APIs': '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" /></svg>',
+  'Cloud, DevOps & Terminal': '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z" /></svg>',
+  'IA & Buenas Prácticas': '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>',
+  'AI & Best Practices': '<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>',
+};
+
+const categories = t.stack.categories;
+---
+
+<section id="stack" class="relative py-14 sm:py-16 overflow-hidden">
+	<!-- Ambient glow -->
+	<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[600px] h-[600px] bg-gradient-to-br from-rose-600/5 to-cyan-500/5 blur-[160px] rounded-full pointer-events-none -z-10"></div>
+
+	<div class="mx-auto max-w-6xl px-4 sm:px-6">
+		<!-- Section Title -->
+		<div class="stack-title text-center mb-10 sm:mb-12">
+			<h2 class="text-3xl sm:text-4xl font-bold font-display text-white" data-i18n="stack.sectionTitle">{t.stack.sectionTitle}</h2>
+			<p class="mt-3 text-slate-400 text-base sm:text-lg" data-i18n="stack.sectionSubtitle">{t.stack.sectionSubtitle}</p>
+			<div class="mesh-line w-24 mx-auto mt-4"></div>
+		</div>
+
+		<!-- Tech Categories Grid -->
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="stack-grid">
+			{categories.map((category, catIndex) => (
+				<div class="stack-card spotlight-card glass rounded-2xl p-6 glow-hover" data-cat-index={catIndex}>
+					<div class="flex items-center gap-3 mb-5">
+						<div class="w-10 h-10 rounded-xl bg-rose-500/15 border border-rose-500/25 flex items-center justify-center text-rose-400">
+							<Fragment set:html={categoryIcons[category.name] || categoryIcons['Bases de Datos & APIs']} />
+						</div>
+						<h3 class="text-lg font-bold font-display text-white" data-cat-name={catIndex}>{category.name}</h3>
+					</div>
+					<div class="grid grid-cols-3 gap-3">
+						{category.items.map((item) => (
+							<div class="tech-item group/item flex flex-col items-center gap-2.5 p-3 rounded-xl bg-white/[0.03] border border-white/5 cursor-default">
+								<div class="w-8 h-8 flex items-center justify-center transition-transform duration-300 group-hover/item:scale-110">
+									{techIcons[item] ? (
+										<Fragment set:html={techIcons[item]} />
+									) : (
+										<svg class="w-6 h-6 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+										</svg>
+									)}
+								</div>
+								<span class="text-xs text-slate-300 group-hover/item:text-rose-300 transition-colors text-center font-medium font-mono">{item}</span>
+							</div>
+						))}
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<script>
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { translations, type Lang } from '../i18n/translations';
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	// === Spotlight Effect on Stack Cards ===
+	const stackCards = document.querySelectorAll<HTMLElement>('.stack-card');
+	stackCards.forEach((card) => {
+		card.addEventListener('mousemove', (e) => {
+			const rect = card.getBoundingClientRect();
+			const x = e.clientX - rect.left;
+			const y = e.clientY - rect.top;
+			card.style.setProperty('--mouse-x', `${x}px`);
+			card.style.setProperty('--mouse-y', `${y}px`);
+		});
+	});
+
+	// === GSAP Micro-interactions on Tech Items ===
+	const techItems = document.querySelectorAll<HTMLElement>('.tech-item');
+	techItems.forEach((item) => {
+		item.addEventListener('mouseenter', () => {
+			gsap.to(item, { scale: 1.04, duration: 0.2, ease: 'power1.out' });
+		});
+		item.addEventListener('mouseleave', () => {
+			gsap.to(item, { scale: 1, duration: 0.2, ease: 'power1.in' });
+		});
+	});
+
+	// === GSAP ScrollTrigger Animations (Appear on scroll down, disappear on scroll up) ===
+	const mm = gsap.matchMedia();
+
+	mm.add(
+		{
+			reduceMotion: '(prefers-reduced-motion: reduce)',
+			normalMotion: '(prefers-reduced-motion: no-preference)',
+		},
+		(context) => {
+			const { reduceMotion } = context.conditions as { reduceMotion: boolean };
+
+			if (reduceMotion) {
+				gsap.set('.stack-title, .stack-card', { opacity: 1, y: 0 });
+				return;
+			}
+
+			// Section Title
+			gsap.set('.stack-title', { opacity: 0, y: 30 });
+			ScrollTrigger.batch('.stack-title', {
+				start: 'top 88%',
+				onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', overwrite: 'auto' }),
+				onLeaveBack: (batch) => gsap.to(batch, { opacity: 0, y: 30, duration: 0.4, ease: 'power2.in', overwrite: 'auto' }),
+			});
+
+			// Stack Category Cards
+			gsap.set('.stack-card', { opacity: 0, y: 40 });
+			ScrollTrigger.batch('.stack-card', {
+				start: 'top 88%',
+				interval: 0.1,
+				batchMax: 4,
+				onEnter: (batch) => {
+					gsap.to(batch, {
+						opacity: 1,
+						y: 0,
+						duration: 0.6,
+						stagger: 0.12,
+						ease: 'power2.out',
+						overwrite: 'auto',
+					});
+				},
+				onLeaveBack: (batch) => {
+					gsap.to(batch, {
+						opacity: 0,
+						y: 40,
+						duration: 0.4,
+						stagger: 0.06,
+						ease: 'power2.in',
+						overwrite: 'auto',
+					});
+				},
+			});
+		}
+	);
+
+	// === Update category names on language change ===
+	window.addEventListener('lang-change', ((e: CustomEvent) => {
+		const lang: Lang = e.detail.lang;
+		const t = translations[lang];
+
+		t.stack.categories.forEach((cat, i) => {
+			const el = document.querySelector(`[data-cat-name="${i}"]`);
+			if (el) el.textContent = cat.name;
+		});
+
+		ScrollTrigger.refresh();
+	}) as EventListener);
+</script>
