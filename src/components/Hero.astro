@@ -1,0 +1,491 @@
+---
+import { translations } from '../i18n/translations';
+const t = translations.es;
+---
+
+<section id="hero" class="relative min-h-[85vh] lg:min-h-screen flex items-center overflow-hidden pt-28 pb-12 sm:pb-16">
+	<!-- Background ambient glows -->
+	<div class="hero-glow-1 absolute -top-32 left-1/4 w-[550px] h-[550px] bg-gradient-to-br from-rose-600/15 to-rose-900/5 blur-[150px] rounded-full pointer-events-none -z-10"></div>
+	<div class="hero-glow-2 absolute bottom-10 right-1/4 w-[450px] h-[450px] bg-gradient-to-tr from-cyan-600/10 to-emerald-600/5 blur-[140px] rounded-full pointer-events-none -z-10"></div>
+
+	<div class="mx-auto max-w-6xl px-4 sm:px-6 w-full">
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+			<!-- Left: Text content -->
+			<div class="text-center lg:text-left">
+				<!-- Badge -->
+				<div class="hero-badge inline-flex items-center gap-2.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs sm:text-sm font-medium text-emerald-300 backdrop-blur-sm mb-6">
+					<span class="inline-block h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+					<span data-i18n="hero.badge">{t.hero.badge}</span>
+				</div>
+
+				<!-- Title -->
+				<h1 class="hero-title text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.08] font-display">
+					<span data-i18n="hero.title">{t.hero.title}</span>
+					<br />
+					<span class="text-rose-500" data-i18n="hero.titleHighlight">{t.hero.titleHighlight}</span>
+				</h1>
+
+				<!-- Subtitle -->
+				<p class="hero-subtitle mt-6 text-base sm:text-lg text-slate-400 leading-relaxed max-w-xl mx-auto lg:mx-0 font-normal" data-i18n="hero.subtitle">
+					{t.hero.subtitle}
+				</p>
+
+				<!-- CTA Buttons -->
+				<div class="hero-cta mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4">
+					<a
+						href="#projects"
+						id="hero-primary-cta"
+						class="magnetic-btn inline-flex items-center justify-center rounded-xl bg-rose-600 px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-rose-600/30 hover:bg-rose-500 transition-all hover:shadow-rose-600/45 active:scale-[0.98]"
+					>
+						<span data-i18n="hero.cta1">{t.hero.cta1}</span>
+						<svg class="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+						</svg>
+					</a>
+					<a
+						href="/contacto"
+						class="magnetic-btn inline-flex items-center justify-center rounded-xl border border-slate-700 bg-[#12192b]/80 px-7 py-3.5 text-sm font-semibold text-slate-200 backdrop-blur-sm transition-all hover:border-slate-500 hover:text-white hover:bg-[#172138] active:scale-[0.98]"
+					>
+						<span data-i18n="hero.cta2">{t.hero.cta2}</span>
+					</a>
+				</div>
+			</div>
+
+			<!-- Right: Interactive Terminal -->
+			<div class="hero-terminal">
+				<div id="terminal-container" class="terminal relative group">
+					<div class="terminal-header justify-between">
+						<div class="flex items-center gap-2">
+							<div class="terminal-dot bg-red-500/90"></div>
+							<div class="terminal-dot bg-yellow-500/90"></div>
+							<div class="terminal-dot bg-green-500/90"></div>
+							<span class="ml-3 text-xs text-slate-400 font-mono flex items-center gap-1.5">
+								<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+								production@node-01
+							</span>
+						</div>
+						<div class="flex items-center gap-2">
+							<button
+								id="btn-re-run-terminal"
+								class="text-[11px] font-mono text-slate-400 hover:text-rose-400 px-2 py-0.5 rounded bg-white/5 hover:bg-white/10 border border-white/5 transition-all flex items-center gap-1 cursor-pointer"
+								title="Re-ejecutar simulación automática"
+							>
+								<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+								</svg>
+								<span>test</span>
+							</button>
+							<button
+								id="btn-try-terminal"
+								class="text-[11px] font-mono text-emerald-400 hover:text-emerald-300 px-2.5 py-0.5 rounded bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/25 transition-all flex items-center gap-1.5 cursor-pointer font-semibold shadow-sm shadow-emerald-500/10"
+								title="Abrir terminal interactiva"
+							>
+								<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+								<span>try</span>
+							</button>
+						</div>
+					</div>
+
+					<!-- View 1: Animated Simulation -->
+					<div id="terminal-animated-view" class="terminal-body font-mono text-xs sm:text-sm space-y-1 block">
+						<div id="terminal-line-1" class="terminal-line command opacity-0"></div>
+						<div id="terminal-line-2" class="terminal-line output opacity-0"></div>
+						<div id="terminal-line-3" class="terminal-line command opacity-0 pt-1"></div>
+						<div id="terminal-line-4" class="terminal-line highlight opacity-0"></div>
+						<div class="pt-1.5"></div>
+						<div id="terminal-line-5" class="terminal-line command opacity-0"></div>
+						<div id="terminal-line-6" class="terminal-line output opacity-0"></div>
+						<div id="terminal-line-7" class="terminal-line success opacity-0"></div>
+						<div id="terminal-line-8" class="terminal-line success opacity-0 font-medium"></div>
+					</div>
+
+					<!-- View 2: Interactive CLI -->
+					<div id="terminal-interactive-view" class="terminal-body font-mono text-xs sm:text-sm hidden flex-col justify-between min-h-[320px]">
+						<!-- Suggestion chips bar -->
+						<div class="flex flex-wrap items-center gap-1.5 pb-2.5 mb-2 border-b border-white/5 text-[11px]">
+							<span class="text-slate-500 mr-1 text-[10px] uppercase font-bold tracking-wider">Comandos:</span>
+							<button type="button" class="term-chip px-2 py-0.5 rounded bg-white/5 hover:bg-rose-500/20 border border-white/10 hover:border-rose-500/30 text-rose-300 transition-colors cursor-pointer" data-cmd="whoami">whoami</button>
+							<button type="button" class="term-chip px-2 py-0.5 rounded bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 text-cyan-300 transition-colors cursor-pointer" data-cmd="ls">ls</button>
+							<button type="button" class="term-chip px-2 py-0.5 rounded bg-white/5 hover:bg-amber-500/20 border border-white/10 hover:border-amber-500/30 text-amber-300 transition-colors cursor-pointer" data-cmd="cat skills.json">cat skills.json</button>
+							<button type="button" class="term-chip px-2 py-0.5 rounded bg-white/5 hover:bg-emerald-500/20 border border-white/10 hover:border-emerald-500/30 text-emerald-300 transition-colors cursor-pointer" data-cmd="help">help</button>
+							<button type="button" class="term-chip px-2 py-0.5 rounded bg-white/5 hover:bg-slate-700 border border-white/10 text-slate-400 transition-colors cursor-pointer ml-auto" data-cmd="clear">clear</button>
+						</div>
+
+						<!-- History output area -->
+						<div id="interactive-history" class="space-y-1.5 max-h-[290px] overflow-y-auto pr-1 text-slate-300 scrollbar-thin">
+							<div class="text-slate-400 text-xs">
+								💡 <span class="text-emerald-400 font-semibold">Terminal Interactiva Activa.</span> Escribe <span class="text-cyan-400 font-bold">ls</span>, <span class="text-rose-400 font-bold">whoami</span> o <span class="text-amber-400 font-bold">cat skills.json</span>.
+							</div>
+						</div>
+
+						<!-- Prompt input line -->
+						<div class="flex items-center gap-2 pt-2.5 mt-2 border-t border-white/5">
+							<span class="text-emerald-400 font-bold shrink-0">guest@benjamin:~$</span>
+							<input
+								id="interactive-input"
+								type="text"
+								maxlength="64"
+								autocomplete="off"
+								autocorrect="off"
+								autocapitalize="off"
+								spellcheck="false"
+								class="w-full bg-transparent text-white focus:outline-none font-mono text-xs sm:text-sm placeholder:text-slate-600 caret-rose-500"
+								placeholder="Escribe un comando..."
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	import { gsap } from 'gsap';
+	import { translations, type Lang } from '../i18n/translations';
+
+	// === Terminal typing animation ===
+	function getTerminalLines(lang: Lang): string[] {
+		const t = translations[lang];
+		return [
+			t.terminal.line1,
+			t.terminal.line2,
+			t.terminal.line3,
+			t.terminal.line4,
+			t.terminal.line5,
+			t.terminal.line6,
+			t.terminal.line7,
+			t.terminal.line8,
+		];
+	}
+
+	let terminalAnimationTimeout: number | undefined;
+
+	function animateTerminal(lang: Lang) {
+		if (terminalAnimationTimeout) clearTimeout(terminalAnimationTimeout);
+
+		const lines = getTerminalLines(lang);
+		const tl = gsap.timeline({ delay: 0.5 });
+
+		lines.forEach((text, i) => {
+			const el = document.getElementById(`terminal-line-${i + 1}`);
+			if (!el) return;
+
+			el.textContent = '';
+			gsap.set(el, { opacity: 0 });
+
+			const isCommand = el.classList.contains('command');
+
+			tl.to(el, {
+				opacity: 1,
+				duration: 0.05,
+				onStart: () => {
+					let charIndex = 0;
+					const speed = isCommand ? 16 : 4;
+
+					const typeInterval = setInterval(() => {
+						charIndex++;
+						el.textContent = text.slice(0, charIndex);
+						if (charIndex >= text.length) {
+							clearInterval(typeInterval);
+						}
+					}, speed);
+				},
+			});
+
+			const duration = isCommand ? text.length * 0.018 + 0.25 : text.length * 0.005 + 0.1;
+			tl.to({}, { duration });
+		});
+	}
+
+	// === Mode Switching (Animated vs Interactive) ===
+	const animatedView = document.getElementById('terminal-animated-view');
+	const interactiveView = document.getElementById('terminal-interactive-view');
+	const reRunBtn = document.getElementById('btn-re-run-terminal');
+	const tryBtn = document.getElementById('btn-try-terminal');
+	const interactiveInput = document.getElementById('interactive-input') as HTMLInputElement | null;
+	const interactiveHistory = document.getElementById('interactive-history');
+
+	function switchToAnimated() {
+		animatedView?.classList.remove('hidden');
+		animatedView?.classList.add('block');
+		interactiveView?.classList.add('hidden');
+		interactiveView?.classList.remove('flex');
+
+		const currentLang = (document.documentElement.getAttribute('data-lang') as Lang) || 'es';
+		gsap.fromTo(
+			'#terminal-container',
+			{ scale: 0.98, opacity: 0.85 },
+			{ scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(2)' }
+		);
+		animateTerminal(currentLang);
+	}
+
+	function switchToInteractive() {
+		animatedView?.classList.add('hidden');
+		animatedView?.classList.remove('block');
+		interactiveView?.classList.remove('hidden');
+		interactiveView?.classList.add('flex');
+
+		gsap.fromTo(
+			'#terminal-interactive-view',
+			{ opacity: 0, y: 4 },
+			{ opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' }
+		);
+
+		interactiveInput?.focus();
+	}
+
+	reRunBtn?.addEventListener('click', switchToAnimated);
+	tryBtn?.addEventListener('click', switchToInteractive);
+
+	// Click anywhere inside interactive terminal to focus input
+	interactiveView?.addEventListener('click', () => {
+		interactiveInput?.focus();
+	});
+
+	// === Interactive Command Execution ===
+	const commandHistory: string[] = [];
+	let historyIndex = -1;
+	const MAX_INPUT_LENGTH = 64;
+	const MAX_HISTORY_ENTRIES = 50;
+	const VALID_COMMANDS = new Set(['whoami', 'l', 'ls', 'dir', 'cat skills.json', 'cat about.txt', 'contact', 'cat contact.sh', './contact.sh', 'help', 'clear', 'cls', 'exit', 'spider-man', 'spiderman']);
+
+	function executeCommand(rawCmd: string) {
+		if (!interactiveHistory) return;
+
+		// Sanitize: trim, truncate, strip control chars
+		const cmd = rawCmd.trim().slice(0, MAX_INPUT_LENGTH).replace(/[\x00-\x1f\x7f]/g, '');
+		if (!cmd) return;
+
+		// Cap history size to prevent memory abuse
+		if (commandHistory.length >= MAX_HISTORY_ENTRIES) {
+			commandHistory.shift();
+		}
+		commandHistory.push(cmd);
+		historyIndex = commandHistory.length;
+
+		// Cap DOM history entries to prevent DOM flooding
+		while (interactiveHistory.children.length > MAX_HISTORY_ENTRIES * 2) {
+			interactiveHistory.removeChild(interactiveHistory.firstChild!);
+		}
+
+		const currentLang = (document.documentElement.getAttribute('data-lang') as Lang) || 'es';
+		const t = translations[currentLang];
+
+		// User prompt line — use textContent for the command (no innerHTML for user input)
+		const userEntry = document.createElement('div');
+		userEntry.className = 'flex items-center gap-2 text-xs pt-1';
+		const promptSpan = document.createElement('span');
+		promptSpan.className = 'text-emerald-400 font-bold';
+		promptSpan.textContent = 'guest@benjamin:~$';
+		const cmdSpan = document.createElement('span');
+		cmdSpan.className = 'text-cyan-300 font-semibold';
+		cmdSpan.textContent = cmd;
+		userEntry.appendChild(promptSpan);
+		userEntry.appendChild(document.createTextNode(' '));
+		userEntry.appendChild(cmdSpan);
+		interactiveHistory.appendChild(userEntry);
+
+		const normalized = cmd.toLowerCase().trim();
+		const responseEntry = document.createElement('div');
+		responseEntry.className = 'text-xs pl-2 border-l border-white/10 my-0.5 leading-relaxed';
+
+		if (normalized === 'whoami') {
+			responseEntry.innerHTML = `<span class="text-slate-200 font-semibold">Benjamin Droguett</span> — <span class="text-rose-400">Ing. Civil en Computación e Informática</span> | <span class="text-emerald-400">Especialista Backend</span><br/><span class="text-slate-400">Chile · Disponible para proyectos y oportunidades profesionales.</span>`;
+		} else if (normalized === 'l' || normalized === 'ls' || normalized === 'dir') {
+			responseEntry.innerHTML = `<div class="flex flex-wrap gap-x-4 gap-y-1 font-mono">
+				<span class="text-amber-400">skills.json</span>
+				<span class="text-slate-300">about.txt</span>
+				<span class="text-emerald-400">contact.sh*</span>
+				<span class="text-cyan-400">projects/</span>
+			</div>`;
+		} else if (normalized === 'cat skills.json') {
+			responseEntry.innerHTML = `<pre class="text-rose-300 font-mono text-[11px] overflow-x-auto whitespace-pre-wrap">{
+  "languages": ["C#", "JavaScript", "TypeScript", "Python", "SQL"],
+  "backend": ["Node.js", ".NET", "Express", "APIs REST"],
+  "database": ["PostgreSQL", "MongoDB", "Supabase", "Redis"],
+  "infra": ["Docker", "Linux", "Git", "GitHub Actions"]
+}</pre>`;
+		} else if (normalized === 'cat about.txt') {
+			// Use textContent for translation content to prevent any injection
+			const aboutSpan = document.createElement('span');
+			aboutSpan.className = 'text-slate-300';
+			aboutSpan.textContent = t.about.bioText.slice(0, 180) + '...';
+			responseEntry.appendChild(aboutSpan);
+			interactiveHistory.appendChild(responseEntry);
+			interactiveHistory.scrollTop = interactiveHistory.scrollHeight;
+			return;
+		} else if (normalized === 'contact' || normalized === 'cat contact.sh' || normalized === './contact.sh') {
+			responseEntry.innerHTML = `<div class="text-slate-300 space-y-0.5">
+				<div>GitHub: <a href="https://github.com/AndrewsB05" target="_blank" rel="noopener noreferrer" class="text-rose-400 hover:underline">github.com/AndrewsB05</a></div>
+				<div>Contacto: <a href="/contacto" class="text-cyan-400 hover:underline">Formulario de contacto</a></div>
+			</div>`;
+		} else if (normalized === 'help') {
+			responseEntry.innerHTML = `<div class="text-slate-300 space-y-0.5">
+				<div><span class="text-cyan-400 font-bold">whoami</span> — Muestra información sobre Benjamin</div>
+				<div><span class="text-cyan-400 font-bold">ls</span> o <span class="text-cyan-400 font-bold">l</span> — Lista los archivos disponibles</div>
+				<div><span class="text-cyan-400 font-bold">cat skills.json</span> — Muestra el stack técnico en formato JSON</div>
+				<div><span class="text-cyan-400 font-bold">cat about.txt</span> — Breve resumen profesional</div>
+				<div><span class="text-cyan-400 font-bold">contact</span> — Muestra enlaces de contacto</div>
+				<div><span class="text-cyan-400 font-bold">clear</span> — Limpia la pantalla de la terminal</div>
+				<div><span class="text-cyan-400 font-bold">exit</span> — Regresa a la animación automática</div>
+			</div>`;
+		} else if (normalized === 'clear' || normalized === 'cls') {
+			interactiveHistory.innerHTML = '';
+			return;
+		} else if (normalized === 'exit') {
+			switchToAnimated();
+			return;
+		} else if (normalized === 'spider-man' || normalized === 'spiderman') {
+			const spiderArt = `⡆⡆⡆⣇⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⣇⡆⡆⡆
+⡆⣇⣇⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⣇⣇⡆
+⡆⣇⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⣇⡆
+⣇⣇⡆⡆⡆⡆⣇⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⣇⡆⡆⡆⡆⣇⣇
+⣇⣇⡆⡆⡆⣇⣇⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⣇⣇⡆⡆⡆⣇⣇
+⡆⣇⣇⣇⡆⡆⣇⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⣇⡆⡆⣇⣇⣇⡆
+⡆⡆⡆⣇⣇⣇⡆⣇⣇⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⣇⣇⡆⣇⣇⣇⡆⡆⡆
+⡆⡆⡆⡆⡆⡆⡆⣇⣇⣇⣇⡆⣇⣇⣇⣇⣇⣇⡆⣇⣇⣇⣇⡆⡆⡆⡆⡆⡆⡆
+⡆⡆⡆⡆⡆⡆⡆⡆⣇⣇⣇⣇⣇⣇⣇⣇⣇⣇⣇⣇⣇⣇⡆⡆⡆⡆⡆⡆⡆⡆
+⡆⡆⡆⡆⡆⣇⣇⣇⣇⣇⡆⣇⣇⣇⣇⣇⣇⣇⣇⡆⣇⣇⣇⣇⣇⡆⡆⡆⡆⡆
+⡆⡆⣇⣇⣇⡆⣇⣇⣇⡆⡆⡆⣇⣇⣇⣇⣇⣇⡆⡆⡆⣇⣇⣇⡆⣇⣇⣇⡆⡆
+⡆⡆⣇⣇⡆⡆⡆⣇⣇⡆⡆⡆⣇⣇⣇⣇⣇⣇⡆⡆⡆⣇⣇⡆⡆⡆⣇⣇⡆⡆
+⡆⡆⣇⣇⡆⡆⡆⣇⣇⡆⡆⡆⡆⡆⣇⣇⣇⡆⡆⡆⡆⣇⣇⡆⡆⡆⣇⣇⡆⡆
+⡆⡆⣇⣇⣇⡆⡆⡆⣇⣇⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⣇⣇⡆⡆⡆⣇⣇⣇⡆⡆
+⡆⡆⡆⣇⣇⡆⡆⡆⡆⣇⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⣇⡆⡆⡆⡆⣇⣇⡆⡆⡆
+⡆⡆⡆⡆⣇⣇⡆⡆⡆⡆⣇⡆⡆⡆⡆⡆⡆⡆⡆⣇⡆⡆⡆⡆⣇⣇⡆⡆⡆⡆
+⡆⡆⡆⡆⡆⣇⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⣇⡆⡆⡆⡆⡆
+⡆⡆⡆⡆⡆⡆⣇⣇⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⣇⣇⡆⡆⡆⡆⡆⡆`;
+			const coloredArt = spiderArt.replace(/⣇/g, '<span style="color:#ef4444">⣇</span>').replace(/⡆/g, '<span style="color:rgba(30,20,40,0.6)">⡆</span>');
+			responseEntry.innerHTML = `<div class="space-y-1.5">
+				<div class="text-red-500 font-bold text-sm">🕷️ "With great power comes great responsibility."</div>
+				<div class="text-slate-400 text-[11px] italic">— Un recordatorio diario antes de cada <span class="text-cyan-400">git push</span>.</div>
+				<pre class="text-[8px] leading-[1.1] mt-1.5 select-none tracking-tight">${coloredArt}</pre>
+			</div>`;
+		} else {
+			// Error message — use textContent for the user command, never innerHTML
+			const errorSpan = document.createElement('span');
+			errorSpan.className = 'text-red-400';
+			errorSpan.textContent = `comando no reconocido: '${cmd}'.`;
+			const hintSpan = document.createElement('span');
+			hintSpan.className = 'text-slate-400';
+			hintSpan.innerHTML = ` Escribe <span class="text-emerald-400 font-semibold">help</span> para ver los comandos disponibles.`;
+			responseEntry.appendChild(errorSpan);
+			responseEntry.appendChild(hintSpan);
+			interactiveHistory.appendChild(responseEntry);
+			interactiveHistory.scrollTop = interactiveHistory.scrollHeight;
+			return;
+		}
+
+		interactiveHistory.appendChild(responseEntry);
+		interactiveHistory.scrollTop = interactiveHistory.scrollHeight;
+	}
+
+	// Suggestion chips handler
+	document.querySelectorAll<HTMLElement>('.term-chip').forEach((chip) => {
+		chip.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const cmd = chip.getAttribute('data-cmd');
+			if (cmd) {
+				if (interactiveInput) interactiveInput.value = cmd;
+				executeCommand(cmd);
+				if (interactiveInput) interactiveInput.value = '';
+				interactiveInput?.focus();
+			}
+		});
+	});
+
+	// Input key handler
+	interactiveInput?.addEventListener('keydown', (e) => {
+		if (e.key === 'Enter') {
+			e.preventDefault();
+			const val = interactiveInput.value;
+			interactiveInput.value = '';
+			executeCommand(val);
+		} else if (e.key === 'ArrowUp') {
+			e.preventDefault();
+			if (commandHistory.length > 0 && historyIndex > 0) {
+				historyIndex--;
+				interactiveInput.value = commandHistory[historyIndex] || '';
+			}
+		} else if (e.key === 'ArrowDown') {
+			e.preventDefault();
+			if (historyIndex < commandHistory.length - 1) {
+				historyIndex++;
+				interactiveInput.value = commandHistory[historyIndex] || '';
+			} else {
+				historyIndex = commandHistory.length;
+				interactiveInput.value = '';
+			}
+		} else if (e.key === 'Tab') {
+			e.preventDefault();
+			const val = interactiveInput.value.toLowerCase().trim();
+			const autocompletes = ['whoami', 'ls', 'cat skills.json', 'cat about.txt', 'contact', 'clear', 'help', 'exit'];
+			const match = autocompletes.find((a) => a.startsWith(val));
+			if (match) interactiveInput.value = match;
+		}
+	});
+
+	// === Hero entrance animation with GSAP ===
+	const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+	heroTl
+		.from('.hero-glow-1', { scale: 0.4, opacity: 0, duration: 1.6 })
+		.from('.hero-glow-2', { scale: 0.4, opacity: 0, duration: 1.4 }, '-=1.3')
+		.from('.hero-badge', { y: -16, opacity: 0, duration: 0.6 }, '-=0.9')
+		.from('.hero-title', { y: 24, opacity: 0, duration: 0.8 }, '-=0.4')
+		.from('.hero-subtitle', { y: 18, opacity: 0, duration: 0.7 }, '-=0.5')
+		.from('.hero-cta', { y: 16, opacity: 0, duration: 0.6 }, '-=0.4')
+		.from('.hero-terminal', { x: 30, opacity: 0, duration: 0.8, ease: 'power2.out' }, '-=0.5');
+
+	// Start terminal animation
+	const currentLang = (document.documentElement.getAttribute('data-lang') as Lang) || 'es';
+	animateTerminal(currentLang);
+
+	// Re-animate terminal on language change
+	window.addEventListener('lang-change', ((e: CustomEvent) => {
+		animateTerminal(e.detail.lang);
+	}) as EventListener);
+
+	// === 3D Tilt effect on Terminal with GSAP ===
+	const terminalCard = document.getElementById('terminal-container');
+	if (terminalCard && window.matchMedia('(pointer: fine)').matches) {
+		const setX = gsap.quickTo(terminalCard, 'rotationY', { duration: 0.5, ease: 'power2.out' });
+		const setY = gsap.quickTo(terminalCard, 'rotationX', { duration: 0.5, ease: 'power2.out' });
+
+		terminalCard.addEventListener('mousemove', (e) => {
+			const rect = terminalCard.getBoundingClientRect();
+			const x = (e.clientX - rect.left) / rect.width - 0.5;
+			const y = (e.clientY - rect.top) / rect.height - 0.5;
+			setX(x * 8);
+			setY(-y * 8);
+		});
+
+		terminalCard.addEventListener('mouseleave', () => {
+			setX(0);
+			setY(0);
+		});
+	}
+
+	// === Magnetic Buttons with GSAP ===
+	const magneticButtons = document.querySelectorAll<HTMLElement>('.magnetic-btn');
+	magneticButtons.forEach((btn) => {
+		if (!window.matchMedia('(pointer: fine)').matches) return;
+
+		const xTo = gsap.quickTo(btn, 'x', { duration: 0.3, ease: 'power2.out' });
+		const yTo = gsap.quickTo(btn, 'y', { duration: 0.3, ease: 'power2.out' });
+
+		btn.addEventListener('mousemove', (e) => {
+			const rect = btn.getBoundingClientRect();
+			const x = e.clientX - (rect.left + rect.width / 2);
+			const y = e.clientY - (rect.top + rect.height / 2);
+			xTo(x * 0.2);
+			yTo(y * 0.2);
+		});
+
+		btn.addEventListener('mouseleave', () => {
+			xTo(0);
+			yTo(0);
+		});
+	});
+</script>

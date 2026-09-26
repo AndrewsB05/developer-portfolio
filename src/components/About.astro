@@ -1,0 +1,146 @@
+---
+import { translations } from '../i18n/translations';
+const t = translations.es;
+---
+
+<section id="about" class="relative py-14 sm:py-16 overflow-hidden">
+	<!-- Background subtle ambient glow -->
+	<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-rose-500/5 blur-[160px] rounded-full pointer-events-none -z-10"></div>
+
+	<div class="mx-auto max-w-6xl px-4 sm:px-6">
+		<!-- Section Title -->
+		<div class="about-title text-center mb-10 sm:mb-12">
+			<h2 class="text-3xl sm:text-4xl font-bold font-display text-white" data-i18n="about.sectionTitle">{t.about.sectionTitle}</h2>
+			<div class="mesh-line w-24 mx-auto mt-4"></div>
+		</div>
+
+		<!-- Bento Grid with Spotlight Effect -->
+		<div class="bento-grid">
+			<!-- Bio Card -->
+			<div class="about-card spotlight-card glass rounded-2xl p-6 sm:p-8 glow-hover flex flex-col justify-between">
+				<div>
+					<div class="flex items-center gap-3 mb-5">
+						<div class="w-10 h-10 rounded-xl bg-rose-500/15 border border-rose-500/25 flex items-center justify-center">
+							<svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+							</svg>
+						</div>
+						<h3 class="text-xl font-bold font-display text-white" data-i18n="about.bioTitle">{t.about.bioTitle}</h3>
+					</div>
+					<p class="text-slate-300 leading-relaxed text-sm sm:text-base text-justify" data-i18n="about.bioText">{t.about.bioText}</p>
+				</div>
+			</div>
+
+			<!-- Philosophy Card -->
+			<div class="about-card spotlight-card glass rounded-2xl p-6 sm:p-8 glow-hover">
+				<div class="flex items-center gap-3 mb-5">
+					<div class="w-10 h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/25 flex items-center justify-center">
+						<svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+						</svg>
+					</div>
+					<h3 class="text-xl font-bold font-display text-white" data-i18n="about.philosophyTitle">{t.about.philosophyTitle}</h3>
+				</div>
+				<ul class="space-y-3" id="philosophy-list">
+					{t.about.philosophyItems.map((item, i) => (
+						<li class="flex items-start gap-3 text-sm sm:text-base text-slate-300">
+							<svg class="w-4 h-4 text-rose-400 mt-1 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+							</svg>
+							<span data-philosophy-index={i}>{item}</span>
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { translations, type Lang } from '../i18n/translations';
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	// === Spotlight Effect for Bento Cards ===
+	const cards = document.querySelectorAll<HTMLElement>('.spotlight-card');
+	cards.forEach((card) => {
+		card.addEventListener('mousemove', (e) => {
+			const rect = card.getBoundingClientRect();
+			const x = e.clientX - rect.left;
+			const y = e.clientY - rect.top;
+			card.style.setProperty('--mouse-x', `${x}px`);
+			card.style.setProperty('--mouse-y', `${y}px`);
+		});
+	});
+
+
+	// === GSAP ScrollTrigger Animations (Appear on scroll down, disappear on scroll up) ===
+	const mm = gsap.matchMedia();
+
+	mm.add(
+		{
+			reduceMotion: '(prefers-reduced-motion: reduce)',
+			normalMotion: '(prefers-reduced-motion: no-preference)',
+		},
+		(context) => {
+			const { reduceMotion } = context.conditions as { reduceMotion: boolean };
+
+			if (reduceMotion) {
+				gsap.set('.about-title, .about-card', { opacity: 1, y: 0 });
+				return;
+			}
+
+			// Section Title
+			gsap.set('.about-title', { opacity: 0, y: 30 });
+			ScrollTrigger.batch('.about-title', {
+				start: 'top 88%',
+				onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', overwrite: 'auto' }),
+				onLeaveBack: (batch) => gsap.to(batch, { opacity: 0, y: 30, duration: 0.4, ease: 'power2.in', overwrite: 'auto' }),
+			});
+
+			// Bento Cards (batch staggered entrance and exit)
+			gsap.set('.about-card', { opacity: 0, y: 40 });
+			ScrollTrigger.batch('.about-card', {
+				start: 'top 88%',
+				interval: 0.1,
+				batchMax: 2,
+				onEnter: (batch) => {
+					gsap.to(batch, {
+						opacity: 1,
+						y: 0,
+						duration: 0.6,
+						stagger: 0.12,
+						ease: 'power2.out',
+						overwrite: 'auto',
+					});
+				},
+				onLeaveBack: (batch) => {
+					gsap.to(batch, {
+						opacity: 0,
+						y: 40,
+						duration: 0.4,
+						stagger: 0.06,
+						ease: 'power2.in',
+						overwrite: 'auto',
+					});
+				},
+			});
+		}
+	);
+
+	// === Update philosophy on language change ===
+	window.addEventListener('lang-change', ((e: CustomEvent) => {
+		const lang: Lang = e.detail.lang;
+		const t = translations[lang];
+
+		// Update philosophy items
+		t.about.philosophyItems.forEach((item, i) => {
+			const el = document.querySelector(`[data-philosophy-index="${i}"]`);
+			if (el) el.textContent = item;
+		});
+
+		ScrollTrigger.refresh();
+	}) as EventListener);
+</script>

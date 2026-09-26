@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = 'AndrewsB — Ing. Civil en Computación & Backend Developer',
+	description = 'Portafolio profesional de ingeniería de software, desarrollo backend, arquitectura y cloud. AndrewsB.'
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="es" data-lang="es" class="scroll-smooth overflow-x-hidden">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<meta name="theme-color" content="#090d16" />
+		<title>{title}</title>
+	</head>
+	<body class="min-h-screen bg-[#090d16] text-white antialiased selection:bg-rose-600 selection:text-white font-sans grid-overlay overflow-x-hidden">
+		<slot />
+
+		<!-- i18n initialization script -->
+		<script>
+			import { detectLanguage, applyTranslations } from '../i18n/translations';
+
+			// Detect and apply language on page load
+			const lang = detectLanguage();
+			document.documentElement.setAttribute('data-lang', lang);
+			document.documentElement.setAttribute('lang', lang);
+
+			// Wait for DOM to be ready, then apply translations
+			document.addEventListener('DOMContentLoaded', () => {
+				applyTranslations(lang);
+			});
+
+			// Also apply immediately if DOM is already ready
+			if (document.readyState !== 'loading') {
+				applyTranslations(lang);
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,261 @@
+---
+import { translations } from '../i18n/translations';
+const t = translations.es;
+const projects = t.projects.items;
+const filters = t.projects.filters;
+---
+
+<section id="projects" class="relative py-14 sm:py-16 overflow-hidden">
+	<div class="mx-auto max-w-6xl px-4 sm:px-6">
+		<!-- Section Title -->
+		<div class="projects-title text-center mb-8 sm:mb-10">
+			<h2 class="text-3xl sm:text-4xl font-bold font-display text-white" data-i18n="projects.sectionTitle">{t.projects.sectionTitle}</h2>
+			<p class="mt-3 text-slate-400 text-base sm:text-lg" data-i18n="projects.sectionSubtitle">{t.projects.sectionSubtitle}</p>
+			<div class="mesh-line w-24 mx-auto mt-4"></div>
+		</div>
+
+		<!-- Filter Buttons -->
+		<div class="flex flex-wrap items-center justify-center gap-2.5 mb-8 sm:mb-10" id="filter-container">
+			{filters.map((filter, i) => (
+				<button
+					class={`filter-btn px-5 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer ${i === 0 ? 'active' : 'border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 bg-[#12192b]/60'}`}
+					data-filter={i === 0 ? 'all' : ['APIs', 'Cloud', 'DevOps'][i - 1]}
+					data-filter-index={i}
+				>
+					{filter}
+				</button>
+			))}
+		</div>
+
+		<!-- Project Cards Grid -->
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="projects-grid">
+			{projects.map((project, i) => (
+				<article
+					class="project-card spotlight-card glass rounded-2xl overflow-hidden flex flex-col glow-hover"
+					data-category={project.category}
+					data-project-index={i}
+				>
+					<!-- Card Header Accent Line -->
+					<div class={`h-1.5 w-full ${i % 3 === 0 ? 'bg-rose-600' : i % 3 === 1 ? 'bg-cyan-500' : 'bg-emerald-500'}`}></div>
+
+					<div class="p-6 flex flex-col flex-1">
+						<!-- Project icon -->
+						<div class="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center mb-4">
+							{i === 0 && (
+								<svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+								</svg>
+							)}
+							{i === 1 && (
+								<svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+								</svg>
+							)}
+							{i === 2 && (
+								<svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+								</svg>
+							)}
+						</div>
+
+						<!-- Title -->
+						<h3 class="text-lg font-bold font-display text-white mb-2" data-project-title={i}>{project.title}</h3>
+
+						<!-- Description -->
+						<p class="text-sm text-slate-300 leading-relaxed mb-5 flex-1" data-project-desc={i}>{project.description}</p>
+
+						<!-- Tags -->
+						<div class="flex flex-wrap gap-1.5 mb-5">
+							{project.tags.map((tag) => (
+								<span class="px-2.5 py-1 rounded-lg bg-rose-500/10 border border-rose-500/20 text-xs font-medium font-mono text-rose-300">
+									{tag}
+								</span>
+							))}
+						</div>
+
+						<!-- Actions (hidden when a project has no public repo or live demo) -->
+						{(project.github || (project.demo && project.demo !== '#')) && (
+						<div class="flex items-center gap-4 pt-4 border-t border-white/5 mt-auto">
+							{project.github && (
+							<a
+								href={project.github}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-slate-400 hover:text-rose-400 transition-colors"
+							>
+								<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+									<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+								</svg>
+								Code
+							</a>
+							)}
+							{project.demo && project.demo !== '#' && (
+							<a
+								href={project.demo}
+								target="_blank"
+								rel="noopener noreferrer"
+								class="inline-flex items-center gap-1.5 text-xs font-mono font-medium text-slate-400 hover:text-cyan-400 transition-colors"
+							>
+								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+								</svg>
+								Demo
+							</a>
+							)}
+						</div>
+						)}
+					</div>
+				</article>
+			))}
+		</div>
+	</div>
+</section>
+
+<script>
+	import { gsap } from 'gsap';
+	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { translations, type Lang } from '../i18n/translations';
+
+	gsap.registerPlugin(ScrollTrigger);
+
+	// === Spotlight Effect for Project Cards ===
+	const projectCards = document.querySelectorAll<HTMLElement>('.project-card');
+	projectCards.forEach((card) => {
+		card.addEventListener('mousemove', (e) => {
+			const rect = card.getBoundingClientRect();
+			const x = e.clientX - rect.left;
+			const y = e.clientY - rect.top;
+			card.style.setProperty('--mouse-x', `${x}px`);
+			card.style.setProperty('--mouse-y', `${y}px`);
+		});
+	});
+
+	// === GSAP ScrollTrigger Animations (Appear on scroll down, disappear on scroll up) ===
+	const mm = gsap.matchMedia();
+
+	mm.add(
+		{
+			reduceMotion: '(prefers-reduced-motion: reduce)',
+			normalMotion: '(prefers-reduced-motion: no-preference)',
+		},
+		(context) => {
+			const { reduceMotion } = context.conditions as { reduceMotion: boolean };
+
+			if (reduceMotion) {
+				gsap.set('.projects-title, #filter-container, .project-card', { opacity: 1, y: 0 });
+				return;
+			}
+
+			// Section Title
+			gsap.set('.projects-title', { opacity: 0, y: 30 });
+			ScrollTrigger.batch('.projects-title', {
+				start: 'top 88%',
+				onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', overwrite: 'auto' }),
+				onLeaveBack: (batch) => gsap.to(batch, { opacity: 0, y: 30, duration: 0.4, ease: 'power2.in', overwrite: 'auto' }),
+			});
+
+			// Filter Buttons
+			gsap.set('#filter-container', { opacity: 0, y: 20 });
+			ScrollTrigger.batch('#filter-container', {
+				start: 'top 88%',
+				onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', overwrite: 'auto' }),
+				onLeaveBack: (batch) => gsap.to(batch, { opacity: 0, y: 20, duration: 0.35, ease: 'power2.in', overwrite: 'auto' }),
+			});
+
+			// Project Cards
+			gsap.set('.project-card', { opacity: 0, y: 40 });
+			ScrollTrigger.batch('.project-card', {
+				start: 'top 88%',
+				interval: 0.1,
+				batchMax: 3,
+				onEnter: (batch) => {
+					gsap.to(batch, {
+						opacity: 1,
+						y: 0,
+						duration: 0.6,
+						stagger: 0.12,
+						ease: 'power2.out',
+						overwrite: 'auto',
+					});
+				},
+				onLeaveBack: (batch) => {
+					gsap.to(batch, {
+						opacity: 0,
+						y: 40,
+						duration: 0.4,
+						stagger: 0.06,
+						ease: 'power2.in',
+						overwrite: 'auto',
+					});
+				},
+			});
+		}
+	);
+
+	// === Filtering with GSAP ===
+	const filterBtns = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+
+	filterBtns.forEach((btn) => {
+		btn.addEventListener('click', () => {
+			// Update active state
+			filterBtns.forEach((b) => {
+				b.classList.remove('active');
+				b.classList.add('border-slate-800', 'text-slate-400', 'bg-[#12192b]/60');
+			});
+			btn.classList.add('active');
+			btn.classList.remove('border-slate-800', 'text-slate-400', 'bg-[#12192b]/60');
+
+			const filter = btn.getAttribute('data-filter');
+
+			projectCards.forEach((card) => {
+				const category = card.getAttribute('data-category');
+				const shouldShow = filter === 'all' || category === filter;
+
+				if (shouldShow) {
+					gsap.to(card, {
+						opacity: 1,
+						y: 0,
+						scale: 1,
+						duration: 0.35,
+						ease: 'power2.out',
+						display: 'flex',
+					});
+				} else {
+					gsap.to(card, {
+						opacity: 0,
+						scale: 0.96,
+						duration: 0.25,
+						ease: 'power2.in',
+						onComplete: () => {
+							(card as HTMLElement).style.display = 'none';
+						},
+					});
+				}
+			});
+
+			ScrollTrigger.refresh();
+		});
+	});
+
+	// === Update texts on language change ===
+	window.addEventListener('lang-change', ((e: CustomEvent) => {
+		const lang: Lang = e.detail.lang;
+		const t = translations[lang];
+
+		// Update filter buttons
+		t.projects.filters.forEach((filter, i) => {
+			const btn = document.querySelector(`[data-filter-index="${i}"]`);
+			if (btn) btn.textContent = filter;
+		});
+
+		// Update project content
+		t.projects.items.forEach((project, i) => {
+			const titleEl = document.querySelector(`[data-project-title="${i}"]`);
+			const descEl = document.querySelector(`[data-project-desc="${i}"]`);
+			if (titleEl) titleEl.textContent = project.title;
+			if (descEl) descEl.textContent = project.description;
+		});
+
+		ScrollTrigger.refresh();
+	}) as EventListener);
+</script>
