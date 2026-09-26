@@ -1,8 +1,17 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { translations } from '../i18n/translations';
+import pokemonTrackerShot from '../assets/projects/pokemon-chile-market-tracker.png';
+
 const t = translations.es;
 const projects = t.projects.items;
 const filters = t.projects.filters;
+
+// Capturas de los proyectos, por la clave `image` de cada uno (las traducciones no importan imágenes).
+const projectImages: Record<string, ImageMetadata> = {
+	'pokemon-chile-market-tracker': pokemonTrackerShot,
+};
 ---
 
 <section id="projects" class="relative py-14 sm:py-16 overflow-hidden">
@@ -38,8 +47,29 @@ const filters = t.projects.filters;
 					<!-- Card Header Accent Line -->
 					<div class={`h-1.5 w-full ${i % 3 === 0 ? 'bg-rose-600' : i % 3 === 1 ? 'bg-cyan-500' : 'bg-emerald-500'}`}></div>
 
+					<!-- Project screenshot (links to the live demo) -->
+					{project.image && projectImages[project.image] && (
+						<a
+							href={project.demo}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="group/shot block overflow-hidden border-b border-white/5 bg-[#0b111e]"
+							tabindex="-1"
+							aria-hidden="true"
+						>
+							<Image
+								src={projectImages[project.image]}
+								alt=""
+								widths={[400, 800]}
+								sizes="(min-width: 1024px) 352px, (min-width: 768px) 50vw, 100vw"
+								class="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 group-hover/shot:scale-[1.03]"
+							/>
+						</a>
+					)}
+
 					<div class="p-6 flex flex-col flex-1">
-						<!-- Project icon -->
+						<!-- Project icon (only when there is no screenshot) -->
+						{!(project.image && projectImages[project.image]) && (
 						<div class="w-11 h-11 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center mb-4">
 							{i === 0 && (
 								<svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -57,6 +87,7 @@ const filters = t.projects.filters;
 								</svg>
 							)}
 						</div>
+						)}
 
 						<!-- Title -->
 						<h3 class="text-lg font-bold font-display text-white mb-2" data-project-title={i}>{project.title}</h3>

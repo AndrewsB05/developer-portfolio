@@ -59,6 +59,8 @@ export interface Translations {
       category: string;
       github: string;
       demo: string;
+      /** Clave de la captura en `projectImages` (Projects.astro). Sin ella, la tarjeta muestra un ícono. */
+      image?: string;
     }[];
   };
   footer: {
@@ -185,10 +187,11 @@ export const translations: Record<Lang, Translations> = {
           title: 'Pokémon Chile Market Tracker',
           description:
             'Comparador de precios de producto sellado de Pokémon TCG en Chile: un scraper responsable (respeta robots.txt y rate limits) recopila precios y stock de 26 tiendas, un motor de matching unifica las publicaciones en ~440 productos y una API REST alimenta un sitio con búsqueda, filtros e historial de precios.',
-          tags: ['TypeScript', 'Node.js', 'Astro', 'PostgreSQL', 'Vercel'],
+          tags: ['Web Scraping', 'TypeScript', 'Node.js', 'Astro', 'PostgreSQL', 'Vercel'],
           category: 'APIs',
           github: '',
           demo: 'https://pokemon-chile-market-tracker.vercel.app/',
+          image: 'pokemon-chile-market-tracker',
         },
         {
           title: 'Automatización & CI/CD Pipeline',
@@ -345,10 +348,11 @@ export const translations: Record<Lang, Translations> = {
           title: 'Pokémon Chile Market Tracker',
           description:
             'Price comparison platform for sealed Pokémon TCG products in Chile: a polite scraper (robots.txt-aware, rate-limited) collects prices and stock from 26 stores, a matching engine groups listings into ~440 canonical products, and a REST API powers a site with search, filters and price history.',
-          tags: ['TypeScript', 'Node.js', 'Astro', 'PostgreSQL', 'Vercel'],
+          tags: ['Web Scraping', 'TypeScript', 'Node.js', 'Astro', 'PostgreSQL', 'Vercel'],
           category: 'APIs',
           github: '',
           demo: 'https://pokemon-chile-market-tracker.vercel.app/',
+          image: 'pokemon-chile-market-tracker',
         },
         {
           title: 'Automation & CI/CD Pipeline',
