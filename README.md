@@ -11,7 +11,7 @@ Construido con un enfoque en rendimiento, arquitectura limpia y diseño moderno.
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![pnpm](https://img.shields.io/badge/pnpm-Enabled-F69220?style=for-the-badge&logo=pnpm&logoColor=white)](https://pnpm.io)
 
-[English](#-english-summary) • [Características](#-características-principales) • [Estructura](#-estructura-del-proyecto) • [Instalación](#-instalación-y-desarrollo) • [Agentes e IA](#-configuración-de-agentes-e-ia)
+[English](#-english-summary) • [Características](#-características-principales) • [Estructura](#-estructura-del-proyecto) • [Instalación](#-instalación-y-desarrollo)
 
 </div>
 
@@ -68,7 +68,6 @@ portafolio/
 │   │   └── index.astro     # Página de inicio principal
 │   └── styles/
 │       └── global.css      # Estilos globales y tokens de diseño
-├── .agent/ / .agents/      # Skills y configuraciones para asistentes de IA
 ├── AGENTS.md / CLAUDE.md   # Instrucciones y directrices para agentes IA
 ├── astro.config.mjs        # Configuración de Astro y plugins
 └── package.json            # Scripts y dependencias del proyecto
@@ -114,31 +113,9 @@ portafolio/
 
 ---
 
-## 🤖 Configuración de Agentes e IA
-
-Este repositorio incluye configuraciones optimizadas para trabajar con agentes de Inteligencia Artificial (Claude Code, Cursor, Antigravity IDE, etc.):
-
-- **`AGENTS.md` / `CLAUDE.md`**: Reglas y pautas para el flujo de trabajo, comandos de desarrollo en segundo plano y enlaces a documentación.
-- **`.agents/` y `.agent/`**: Contienen las *Skills* del espacio de trabajo (animaciones GSAP, directrices de diseño UI/UX).
-- **`skills-lock.json`**: Lockfile para asegurar que las versiones de las skills se mantengan sincronizadas.
-- **`DESIGN.md` y `PRODUCT.md`**: Especificaciones de arquitectura de producto y diseño del sistema.
-
-> 💡 **Nota sobre Git:** Todos estos archivos de contexto de agentes están destinados a ser versionados en el repositorio para que cualquier agente o colaborador mantenga las mismas normas y habilidades. Los archivos locales temporales (`*.local.json`) están excluidos en `.gitignore`.
-
----
-
 ## 🌍 English Summary
 
 **Benjamin Droguett's Developer Portfolio** is a high-performance personal portfolio built with **Astro**, **Tailwind CSS v4**, **GSAP**, and **TypeScript**. It features full bilingual internationalization (ES/EN), an interactive terminal showcase, a filterable projects catalog, a categorized tech stack, and responsive dark-mode styling tailored for technical recruiters and engineering managers.
-
----
-
-## 📬 Contacto
-
-- **Nombre:** Benjamin Droguett
-- **LinkedIn:** [linkedin.com/in/benjamin-droguett](https://www.linkedin.com/)
-- **GitHub:** [github.com/](https://github.com/)
-- **Email:** contacto@benjamindroguett.dev
 
 ---
 
