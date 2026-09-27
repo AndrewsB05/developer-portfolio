@@ -356,7 +356,8 @@ const t = translations.es;
 ⡆⡆⡆⡆⣇⣇⡆⡆⡆⡆⣇⡆⡆⡆⡆⡆⡆⡆⡆⣇⡆⡆⡆⡆⣇⣇⡆⡆⡆⡆
 ⡆⡆⡆⡆⡆⣇⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⣇⡆⡆⡆⡆⡆
 ⡆⡆⡆⡆⡆⡆⣇⣇⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⡆⣇⣇⡆⡆⡆⡆⡆⡆`;
-			const coloredArt = spiderArt.replace(/⣇/g, '<span style="color:#ef4444">⣇</span>').replace(/⡆/g, '<span style="color:rgba(30,20,40,0.6)">⡆</span>');
+			// Clases en vez de style="": la CSP no permite estilos en línea.
+			const coloredArt = spiderArt.replace(/⣇/g, '<span class="text-[#ef4444]">⣇</span>').replace(/⡆/g, '<span class="text-[rgba(30,20,40,0.6)]">⡆</span>');
 			responseEntry.innerHTML = `<div class="space-y-1.5">
 				<div class="text-red-500 font-bold text-sm">🕷️ "With great power comes great responsibility."</div>
 				<div class="text-slate-400 text-[11px] italic">— Un recordatorio diario antes de cada <span class="text-cyan-400">git push</span>.</div>

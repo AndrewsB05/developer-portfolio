@@ -1,0 +1,15 @@
+# Actualizaciones automáticas de dependencias (PRs semanales). Las de seguridad llegan apenas se publican.
+version: 2
+updates:
+  - package-ecosystem: npm # también cubre pnpm (pnpm-lock.yaml)
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      minor-y-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

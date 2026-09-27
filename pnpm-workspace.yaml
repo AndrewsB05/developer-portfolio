@@ -1,3 +1,9 @@
 allowBuilds:
   esbuild: true
   sharp: true
+
+# Parches de seguridad para dependencias transitivas (misma versión mayor; quitar cuando los paquetes padre las actualicen).
+overrides:
+  path-to-regexp@>=4.0.0 <6.3.0: 6.3.0 # GHSA ReDoS, vía @vercel/routing-utils
+  js-yaml@>=4.0.0 <4.3.2: ^4.3.2 # DoS por merge keys, vía @astrojs/internal-helpers
+  devalue@<5.9.1: ^5.9.1 # DoS con entrada malformada, vía astro
