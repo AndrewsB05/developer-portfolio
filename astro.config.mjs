@@ -18,11 +18,27 @@ export default defineConfig({
     },
     validateSecrets: true,
   },
+  // Content-Security-Policy: Astro agrega un <meta> con hashes de sus scripts y estilos (script-src/style-src).
+  // Todo se sirve desde el propio sitio (fuentes autoalojadas, sin CDN). frame-ancestors no funciona en <meta>:
+  // va como cabecera en vercel.json, junto con el resto de cabeceras de seguridad.
+  security: {
+    csp: {
+      directives: [
+        "default-src 'self'",
+        "img-src 'self' data:",
+        "font-src 'self'",
+        "connect-src 'self'",
+        "object-src 'none'",
+        "base-uri 'self'",
+        "form-action 'self'",
+        "frame-src 'none'",
+        "upgrade-insecure-requests",
+      ],
+    },
+  },
+  // Sin Markdown con código: se desactiva Shiki, que usa estilos en línea incompatibles con la CSP.
+  markdown: { syntaxHighlight: false },
   vite: {
     plugins: [tailwindcss()],
-    server: {
-      cors: true,
-      allowedHosts: true
-    }
-  }
+  },
 });

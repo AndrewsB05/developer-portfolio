@@ -428,11 +428,34 @@ export const translations: Record<Lang, Translations> = {
   },
 };
 
+const LANG_KEY = 'portfolio-lang';
+
+/**
+ * localStorage puede lanzar error (modo privado, cookies bloqueadas): el idioma guardado es una comodidad,
+ * así que si falla se ignora y el sitio sigue funcionando.
+ */
+function readStoredLang(): Lang | null {
+  try {
+    const stored = localStorage.getItem(LANG_KEY);
+    return stored === 'es' || stored === 'en' ? stored : null;
+  } catch {
+    return null;
+  }
+}
+
+function storeLang(lang: Lang): void {
+  try {
+    localStorage.setItem(LANG_KEY, lang);
+  } catch {
+    // Sin almacenamiento disponible: el idioma solo dura esta visita.
+  }
+}
+
 /** Detect browser language, fallback to localStorage or 'es' */
 export function detectLanguage(): Lang {
   if (typeof window !== 'undefined') {
-    const stored = localStorage.getItem('portfolio-lang') as Lang | null;
-    if (stored && (stored === 'es' || stored === 'en')) return stored;
+    const stored = readStoredLang();
+    if (stored) return stored;
 
     const browserLang = navigator.language.slice(0, 2);
     return browserLang === 'en' ? 'en' : 'es';
@@ -449,7 +472,7 @@ export function getTranslation(lang: Lang): Translations {
 export function applyTranslations(lang: Lang): void {
   const t = translations[lang];
   document.documentElement.setAttribute('data-lang', lang);
-  localStorage.setItem('portfolio-lang', lang);
+  storeLang(lang);
 
   document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
     const key = el.getAttribute('data-i18n');
