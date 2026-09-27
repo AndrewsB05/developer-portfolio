@@ -9,7 +9,3 @@ updates:
     groups:
       minor-y-patch:
         update-types: [minor, patch]
-  - package-ecosystem: github-actions
-    directory: /
-    schedule:
-      interval: weekly
