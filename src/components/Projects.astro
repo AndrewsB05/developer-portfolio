@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 import { translations } from '../i18n/translations';
 import pokemonTrackerShot from '../assets/projects/pokemon-chile-market-tracker.png';
+import metroExplorerShot from '../assets/projects/santiago-metro-explorer.png';
 
 const t = translations.es;
 const projects = t.projects.items;
@@ -11,6 +12,7 @@ const filters = t.projects.filters;
 // Capturas de los proyectos, por la clave `image` de cada uno (las traducciones no importan imágenes).
 const projectImages: Record<string, ImageMetadata> = {
 	'pokemon-chile-market-tracker': pokemonTrackerShot,
+	'santiago-metro-explorer': metroExplorerShot,
 };
 ---
 
@@ -28,7 +30,7 @@ const projectImages: Record<string, ImageMetadata> = {
 			{filters.map((filter, i) => (
 				<button
 					class={`filter-btn px-5 py-2 rounded-xl text-sm font-medium border transition-all cursor-pointer ${i === 0 ? 'active' : 'border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 bg-[#12192b]/60'}`}
-					data-filter={i === 0 ? 'all' : ['APIs', 'Cloud', 'DevOps'][i - 1]}
+					data-filter={i === 0 ? 'all' : ['APIs', 'Cloud', 'DevOps', 'Frontend'][i - 1]}
 					data-filter-index={i}
 				>
 					{filter}

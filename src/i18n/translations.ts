@@ -181,8 +181,18 @@ export const translations: Record<Lang, Translations> = {
     projects: {
       sectionTitle: 'Proyectos Destacados',
       sectionSubtitle: 'Desarrollo Back-end, APIs y arquitectura de software',
-      filters: ['Todos', 'APIs', 'Cloud', 'DevOps'],
+      filters: ['Todos', 'APIs', 'Cloud', 'DevOps', 'Frontend'],
       items: [
+        {
+          title: 'Santiago Metro Explorer',
+          description:
+            'Mapa interactivo del Metro de Santiago en SVG nativo, con una vista en perspectiva que gira en 360°: 126 estaciones en 7 líneas, resaltado de líneas y combinaciones, y un planificador de rutas con Dijkstra que penaliza los transbordos. Corre completo en el navegador, con datos JSON validados con Zod, una cámara 3D escrita a mano en TypeScript, accesibilidad WCAG 2.2 AA y 212 tests.',
+          tags: ['Angular', 'TypeScript', 'SVG', 'Zod', 'Vitest', 'Vercel'],
+          category: 'Frontend',
+          github: '',
+          demo: 'https://santiago-metro-explorer.vercel.app/',
+          image: 'santiago-metro-explorer',
+        },
         {
           title: 'Pokémon Chile Market Tracker',
           description:
@@ -342,8 +352,18 @@ export const translations: Record<Lang, Translations> = {
     projects: {
       sectionTitle: 'Featured Projects',
       sectionSubtitle: 'Back-end development, APIs, and software architecture',
-      filters: ['All', 'APIs', 'Cloud', 'DevOps'],
+      filters: ['All', 'APIs', 'Cloud', 'DevOps', 'Frontend'],
       items: [
+        {
+          title: 'Santiago Metro Explorer',
+          description:
+            'Interactive Santiago Metro map in native SVG, with a perspective view that rotates 360°: 126 stations on 7 lines, line and interchange highlighting, and a Dijkstra trip planner that penalizes transfers. It runs fully in the browser, with static JSON data validated by Zod, a hand-written 3D camera in plain TypeScript, WCAG 2.2 AA accessibility and 212 tests.',
+          tags: ['Angular', 'TypeScript', 'SVG', 'Zod', 'Vitest', 'Vercel'],
+          category: 'Frontend',
+          github: '',
+          demo: 'https://santiago-metro-explorer.vercel.app/',
+          image: 'santiago-metro-explorer',
+        },
         {
           title: 'Pokémon Chile Market Tracker',
           description:
