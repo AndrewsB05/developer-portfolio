@@ -136,7 +136,7 @@ export const translations: Record<Lang, Translations> = {
       sectionTitle: 'Sobre mí',
       bioTitle: '¿Quién soy?',
       bioText:
-        'Soy Benjamin Droguett estudiante egresado de la carrera de Ingeniería Civil en Computación e Informática en formación. Me apasiona el desarrollo Back-end, el diseño de arquitectura de software y el aprendizaje profundo de nuevas tecnologías. Mi enfoque de trabajo se fundamenta en el estudio continuo, la observación minuciosa de cada requerimiento y la creación de soluciones eficientes a problemas complejos.',
+        'Soy Benjamin Droguett, Ingeniero Civil en Computación e Informática titulado. Me apasiona el desarrollo Back-end, el diseño de arquitectura de software y el aprendizaje profundo de nuevas tecnologías. Mi enfoque de trabajo se fundamenta en el estudio continuo, la observación minuciosa de cada requerimiento y la creación de soluciones eficientes a problemas complejos.',
       philosophyTitle: 'Mis Objetivos & Filosofía',
       philosophyItems: [
         '🎯 Estudio constante y crecimiento técnico continuo',
@@ -154,7 +154,7 @@ export const translations: Record<Lang, Translations> = {
       ],
       locationTitle: 'Ubicación',
       locationText: 'Chile',
-      locationAvailability: 'Disponible para proyectos, prácticas y colaboraciones',
+      locationAvailability: 'Disponible para oportunidades laborales, proyectos y colaboraciones',
     },
     stack: {
       sectionTitle: 'Stack Tecnológico',
@@ -297,7 +297,7 @@ export const translations: Record<Lang, Translations> = {
       sectionTitle: 'About Me',
       bioTitle: 'Who am I?',
       bioText:
-        "I am Benjamin Droguett, a Computer Science and Informatics Engineering graduate. I'm passionate about Back-end development, software architecture design, and mastering modern technologies. My work approach is based on continuous study, meticulous observation of every requirement, and creating efficient solutions to complex problems.",
+        "I am Benjamin Droguett, a graduated Computer Science and Informatics Engineer. I'm passionate about Back-end development, software architecture design, and mastering modern technologies. My work approach is based on continuous study, meticulous observation of every requirement, and creating efficient solutions to complex problems.",
       philosophyTitle: 'My Goals & Philosophy',
       philosophyItems: [
         '🎯 Continuous learning and technical growth',
@@ -315,7 +315,7 @@ export const translations: Record<Lang, Translations> = {
       ],
       locationTitle: 'Location',
       locationText: 'Chile',
-      locationAvailability: 'Available for projects, internships, and collaborations',
+      locationAvailability: 'Available for job opportunities, projects, and collaborations',
     },
     stack: {
       sectionTitle: 'Tech Stack',

@@ -8,11 +8,11 @@ web
 
 ## Users
 
-Technical recruiters, engineering managers, tech leads, and potential clients evaluating Benjamin Droguett for Backend Developer, Software Engineer, or engineering internship roles.
+Technical recruiters, engineering managers, tech leads, and potential clients evaluating Benjamin Droguett for Backend Developer or Software Engineer roles.
 
 ## Product Purpose
 
-Professional developer portfolio and technical showcase for Benjamin Droguett (Ingeniería Civil en Computación e Informática student). It exists to clearly communicate engineering competence, backend architecture capabilities, code quality, and structured problem-solving skills, converting profile reviews into interview opportunities and professional connections.
+Professional developer portfolio and technical showcase for Benjamin Droguett (Ingeniero Civil en Computación e Informática, graduated). It exists to clearly communicate engineering competence, backend architecture capabilities, code quality, and structured problem-solving skills, converting profile reviews into interview opportunities and professional connections.
 
 ## Positioning
 

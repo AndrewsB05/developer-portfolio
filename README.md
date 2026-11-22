@@ -19,7 +19,7 @@ Construido con un enfoque en rendimiento, arquitectura limpia y diseño moderno.
 
 ## 📋 Descripción
 
-Este proyecto es el portafolio web personal de **Benjamin Droguett** (Estudiante de Ingeniería Civil en Computación e Informática). Diseñado para destacar competencias en desarrollo back-end, diseño de APIs, arquitectura de software, fundamentos de computación (.NET, C#, Node.js, Python, Linux) y buenas prácticas de ingeniería.
+Este proyecto es el portafolio web personal de **Benjamin Droguett** (Ingeniero Civil en Computación e Informática). Diseñado para destacar competencias en desarrollo back-end, diseño de APIs, arquitectura de software, fundamentos de computación (.NET, C#, Node.js, Python, Linux) y buenas prácticas de ingeniería.
 
 ---
 
